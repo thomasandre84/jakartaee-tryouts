@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.thomasandre84</groupId>
+        <artifactId>jakartaee-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    
+    <packaging>war</packaging>
+
+    <artifactId>rest-openapi</artifactId>
+    <name>ReST OpenAPI Example</name>
+    
+   
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.microprofile.openapi</groupId>
+            <artifactId>microprofile-openapi-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.microprofile-ext.openapi-ext</groupId>
+            <artifactId>openapi-ui</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <finalName>rest-openapi</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>fish.payara.maven.plugins</groupId>
+                <artifactId>payara-micro-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--<startClass>com.github.thomasandre84.openapi.ApplicationConfig</startClass>-->
+                    <!--<autoDeployContextRoot>rest-openapi</autoDeployContextRoot>-->
+                    <!--<autoDeployEmptyContextRoot>false</autoDeployEmptyContextRoot>-->
+                    <useUberJar>false</useUberJar>
+                    <!--<payaraMicroAbsolutePath>.../applServer/payara-micro.jar</payaraMicroAbsolutePath>-->
+                    <payaraVersion>6.2022.2</payaraVersion>
+                    <artifactItem>
+                        <groupId>fish.payara.extras</groupId>
+                        <artifactId>payara-micro</artifactId>
+                        <version>6.2022.2</version>
+                    </artifactItem>
+                    <daemon>false</daemon>
+                    <!--<javaPath>.../bin/java</javaPath>-->
+                    <deployWar>true</deployWar>
+                    <javaCommandLineOptions>
+                        <option>
+                            <value>-Xdebug</value>
+                        </option>
+                        <!--<option>
+                            <key>-Xrunjdwp:transport</key>
+                            <value>dt_socket,server=y,suspend=y,address=5005</value>
+                        </option>-->
+                    </javaCommandLineOptions>
+                    <!--<commandLineOptions>
+                        <option>
+                            <key>- -domainconfig</key>
+                            <value>/path/to/domain.xml</value>
+                        </option>
+                        <option>
+                            <key>- -autoBindHttp</key>
+                            <value>true</value>
+                        </option>
+                    </commandLineOptions>-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
