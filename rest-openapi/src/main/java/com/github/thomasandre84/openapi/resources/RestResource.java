@@ -19,10 +19,13 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.eclipse.microprofile.openapi.annotations.tags.Tags;
 
 
 @Path("hello")
 @Produces(MediaType.APPLICATION_JSON)
+@Tag(name = "hello" )
 public class RestResource {
     
     @GET
