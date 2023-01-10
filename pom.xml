@@ -12,6 +12,10 @@
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <version.wildfly>27.0.1.Final</version.wildfly>
+        <version.wildfly.datasources.galleon-pack>3.0.0.Final</version.wildfly.datasources.galleon-pack>
+        <version.bootable.jar>8.1.0.Final</version.bootable.jar>
+        <plugin.fork.embedded>true</plugin.fork.embedded>
     </properties>
 
     <modules>
@@ -53,6 +57,11 @@
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-jar-maven-plugin</artifactId>
+                <version>${version.bootable.jar}</version>
             </plugin>
         </plugins>
     </pluginManagement>
